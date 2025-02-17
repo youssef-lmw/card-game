@@ -28,7 +28,7 @@ class CardGameServiceTest extends TestCase
         $hand = $this->cardGameService->generateRandomHand();
         
         $uniqueCards = array_unique(array_map(function(Card $card) {
-            return $card->getSuit() . '-' . $card->getValue();
+            return $card->getColor() . '-' . $card->getValue();
         }, $hand));
         
         $this->assertCount(10, $uniqueCards);
@@ -47,23 +47,23 @@ class CardGameServiceTest extends TestCase
         $sortedHand = $this->cardGameService->sortHand($hand);
 
         // Verify the order
-        $this->assertEquals('Carreaux', $sortedHand[0]->getSuit());
+        $this->assertEquals('Carreaux', $sortedHand[0]->getColor());
         $this->assertEquals('10', $sortedHand[0]->getValue());
         
-        $this->assertEquals('Coeur', $sortedHand[1]->getSuit());
+        $this->assertEquals('Coeur', $sortedHand[1]->getColor());
         $this->assertEquals('AS', $sortedHand[1]->getValue());
         
-        $this->assertEquals('Pique', $sortedHand[2]->getSuit());
+        $this->assertEquals('Pique', $sortedHand[2]->getColor());
         $this->assertEquals('Roi', $sortedHand[2]->getValue());
         
-        $this->assertEquals('Trèfle', $sortedHand[3]->getSuit());
+        $this->assertEquals('Trèfle', $sortedHand[3]->getColor());
         $this->assertEquals('7', $sortedHand[3]->getValue());
     }
 
-    private function createCard(string $suit, string $value): Card
+    private function createCard(string $color, string $value): Card
     {
         $card = new Card();
-        $card->setSuit($suit);
+        $card->setColor($color);
         $card->setValue($value);
         return $card;
     }
